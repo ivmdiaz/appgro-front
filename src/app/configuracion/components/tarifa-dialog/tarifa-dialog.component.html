@@ -1,0 +1,36 @@
+<div>
+
+    <div fxLayout="row">
+        <h2>Editar tarifa por flete</h2>
+    </div>
+
+    <br/>
+
+    <form [formGroup]="form" autocomplete="off">
+
+        <mat-form-field appearance="fill" class="width-50">
+            <mat-label>Desde (KM)</mat-label>
+            <input formControlName="rangoInicial" matInput readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-50 ml-2">
+            <mat-label>Hasta(KM)</mat-label>
+            <input formControlName="rangoFinal" matInput readonly>
+        </mat-form-field>
+
+        <br/>
+
+        <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Valor de tarifa</mat-label>
+            <input formControlName="tarifa" matInput autocomplete="off" type="text" pattern="\d*" maxlength="15"
+                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+        </mat-form-field>
+
+        <br/><br/>
+
+        <button mat-raised-button class="width-100" (click)="onSubmit()" color="primary">
+            Asignar tarifa
+        </button>
+
+    </form>
+
+</div>

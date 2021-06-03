@@ -1,0 +1,75 @@
+<app-header></app-header>
+<div class="example-container">
+
+  <div class="width-100">
+    <h1>Registro de comprador</h1>
+  </div>
+
+  <br />
+
+  <form [formGroup]="registerForm" class="example-form" autocomplete="off">
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Nombres</mat-label>
+      <input matInput placeholder="Nombres" formControlName="nombreCompleto" maxlength="100">
+      <mat-error *ngIf="f.nombreCompleto.errors?.required">Nombres es un campo requerido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Primer Apellido</mat-label>
+      <input matInput placeholder="Primer Apellido" formControlName="primerApellido" maxlength="50">
+      <mat-error *ngIf="f.primerApellido.errors?.required">Primer Apellido es un campo requerido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Segundo Apellido</mat-label>
+      <input matInput placeholder="Segundo Apellido" formControlName="segundoApellido" maxlength="50">
+      <mat-error *ngIf="f.segundoApellido.errors?.required">Segundo Apellido es un campo requerido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Celular</mat-label>
+      <input matInput placeholder="Celular" formControlName="celular" maxlength="30">
+      <mat-error *ngIf="f.celular.errors?.required">Celular es un campo requerido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Correo Electrónico</mat-label>
+      <input type="email" matInput placeholder="Correo Electrónico" formControlName="correo" maxlength="100">
+      <mat-error *ngIf="f.correo.errors?.required">Correo Electrónico es un campo requerido"</mat-error>
+      <mat-error *ngIf="f.correo.errors?.email">Correo Electrónico inválido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Contraseña</mat-label>
+      <input matInput placeholder="Contraseña" formControlName="contrasena" type="password" 
+      autocomplete="off" maxlength="100"/>
+      <mat-error *ngIf="f.contrasena.errors?.minlength">La contraseña debe tener al menos 6 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Confirmar Contraseña</mat-label>
+      <input matInput placeholder="Confirmar Contraseña" formControlName="confirmarContrasena" type="password" 
+      autocomplete="off" maxlength="100"/>
+      <mat-error *ngIf="f.confirmarContrasena.errors?.mustMatch">Las contraseñas deben coincidir</mat-error>
+    </mat-form-field>
+
+    <br /><br />
+
+    <button mat-raised-button class="width-100" (click)="onSubmit()" color="primary">Registrarme</button>
+
+  </form>
+</div>

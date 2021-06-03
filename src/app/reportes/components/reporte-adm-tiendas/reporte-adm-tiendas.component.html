@@ -1,0 +1,115 @@
+<app-header-principal></app-header-principal>
+
+<div class="example-container">
+
+    <div fxLayout="row">
+        <h2>Reporte de administración de ventas por tiendas</h2>
+    </div>
+
+    <br />
+
+    <form [formGroup]="form" class="example-form" autocomplete="off">
+
+        <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Campos del reporte</mat-label>
+            <mat-select #campos formControlName="camposReporte" multiple>
+                <mat-option #matOption (click)="toggleAllSelection(matOption)">
+                    {{allSelected ? 'Borrar todo' : 'Seleccionar todo'}}
+                </mat-option>
+                <mat-divider></mat-divider>
+                <mat-option *ngFor="let option of camposView" [value]="option">{{option.cabecera}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.camposReporte.errors?.required">Campos del reporte es requerido"</mat-error>
+        </mat-form-field>
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <!-- Tiendas field -->
+        <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Tiendas</mat-label>
+            <input placeholder="Seleccione tiendas..." formControlName="tiendas" [matAutocomplete]="autoTienda"
+                [matChipInputFor]="chipList" matInput>
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let item of tiendasView" [selectable]="true" [removable]="true"
+                    (removed)="removeTienda(item)"> {{item.nombre}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+            <mat-autocomplete #autoTienda="matAutocomplete" (optionSelected)="selectTienda($event)"
+                [displayWith]="getLabel">
+                <mat-option *ngFor="let item of tiendasFilter | async" [value]="item">
+                    {{item.nombre}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill" class="width-50">
+            <mat-label>Departamento de venta</mat-label>
+            <input matInput autocomplete="off" formControlName="departamento" [matAutocomplete]="autoDepartamento">
+            <mat-autocomplete (optionSelected)="selectDepartamento($event)" [displayWith]="getLabel"
+                #autoDepartamento="matAutocomplete">
+                <mat-option *ngFor="let option of departamentosFilter | async" [value]="option">
+                    {{option.nombre}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="f.departamento.errors?.incorrect">Seleccione una opción válida</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-50 ml-2">
+            <mat-label>Ciudad de venta</mat-label>
+            <input matInput autocomplete="off" formControlName="ciudad" [matAutocomplete]="autoCiudad">
+            <mat-autocomplete (optionSelected)="selectCiudad($event)" [displayWith]="getLabel"
+                #autoCiudad="matAutocomplete">
+                <mat-option *ngFor="let option of ciudadesFilter | async" [value]="option">
+                    {{option.nombre}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="f.ciudad.errors?.incorrect">Seleccione una opción válida</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill" class="width-50">
+            <mat-label>Fecha de venta desde</mat-label>
+            <input matInput formControlName="fechaDesde" [matDatepicker]="fechaDesdePicker"
+                (dateChange)="fechaDesdeChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="fechaDesdePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fechaDesdePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="width-50 ml-2">
+            <mat-label>Fecha de venta hasta</mat-label>
+            <input matInput formControlName="fechaHasta" [matDatepicker]="fechaHastaPicker">
+            <mat-datepicker-toggle matSuffix [for]="fechaHastaPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fechaHastaPicker></mat-datepicker>
+            <mat-error *ngIf="f.fechaHasta.errors?.matDatepickerMin">Seleccione una fecha válida</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill" class="width-50">
+            <mat-label>Estado de venta</mat-label>
+            <mat-select formControlName="estado">
+                <mat-option *ngFor="let item of ['COMPRADO','ENTREGADO']" [value]="item">
+                    {{item}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <div>
+            <button mat-raised-button class="width-75" (click)="onSubmit()" color="primary">
+                Descargar reporte
+            </button>
+            <button type="button" mat-raised-button class="width-25 ml-2" (click)="onClear()" color="accent">
+                Limpiar filtros
+            </button>
+        </div>
+    </form>
+</div>

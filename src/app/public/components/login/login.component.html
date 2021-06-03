@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="example-container">
+
+  <div class="width-100">
+    <h1>Login</h1>
+  </div>
+
+  <br />
+
+  <form [formGroup]="loginForm" class="example-form" autocomplete="off">
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput placeholder="Correo electrónico" formControlName="usuario">
+      <mat-error *ngIf="f.usuario.errors?.required">Correo electrónico es un campo requerido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field appearance="fill" class="width-100">
+      <mat-label>Contraseña</mat-label>
+      <input matInput placeholder="Contraseña" formControlName="contrasena" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="f.contrasena.errors?.required">Contraseña es un campo requerido"</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <div class="width-100-r">
+      <a [routerLink]="" (click)="goToResetPassword()">¿Has olvidado tu contraseña?</a>
+    </div>
+
+
+    <br />
+
+    <button mat-raised-button class="width-100" (click)="onSubmit()" color="primary">Iniciar sesión</button>
+
+  </form>
+</div>

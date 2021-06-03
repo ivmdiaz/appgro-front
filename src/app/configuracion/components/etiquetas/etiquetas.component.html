@@ -1,0 +1,97 @@
+<app-header-principal></app-header-principal>
+
+<div class="container-main">
+
+    <div fxLayout="row">
+        <h2>Lista de Etiquetas</h2>
+    </div>
+
+
+    <form [formGroup]="etiquetaForm" style="margin-top:10px" autocomplete="off">
+
+        <div fxLayout="row" fxLayoutGap="12px" [style.margin-bottom]="'12px'">
+            <div class="child-1">
+                <mat-form-field>
+                    <mat-label>Etiqueta</mat-label>
+                    <input formControlName="etiqueta" matInput #editEtiqueta maxlength="50">
+                    <button mat-button matSuffix mat-icon-button (click)="clearSeleccion()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="f.etiqueta?.errors?.required">Etiqueta es un campo requerido"</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="child-2">
+                <button mat-raised-button color="primary" (click)="guardarEtiqueta()">Guardar Etiqueta</button>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="30px">
+
+            <div fxLayout="column" fxFlex>
+                <mat-form-field>
+                    <mat-label>Filtro</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" autocomplete="off" placeholder="Ejemplo. Papa Pastusa"
+                        #input>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="column" fxFlex fxLayoutAlign="end">
+                <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+            </div>
+
+        </div>
+
+        <div fxLayout="row">
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!-- id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id.</th>
+                    <td mat-cell *matCellDef="let element"> {{element.idEtiqueta}} </td>
+                </ng-container>
+
+                <!-- nombre Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre</th>
+                    <td mat-cell *matCellDef="let element"> {{ (element.etiqueta.length>50)? (element.etiqueta |
+                        slice:0:50)+'...':(element.etiqueta) }} </td>
+                </ng-container>
+
+                <!-- fecha Column -->
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef> Fecha</th>
+                    <td mat-cell *matCellDef="let element"> {{element.regDate | date:"MM/dd/yy HH:mm"}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button (click)="editarEtiqueta(element)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button (click)="eliminarEtiqueta(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row
+                    [ngClass]="{'highlight': idSelect === row.idEtiqueta}">
+                </tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="3">No tiene etiquetas registradas hasta el momento</td>
+                </tr>
+
+            </table>
+
+
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,108 @@
+<div fxLayout="column" fxLayoutAlign="center" *ngIf="consultaExitosa">
+
+    <form [formGroup]="productoForm" style="margin-top:10px">
+
+        <div fxLayoutAlign="center" style="margin-bottom:20px">
+
+            <div fxFlex="10%" fxLayoutAlign="center">
+                <input #file type='file' (change)="onSelectFile($event)" accept="image/*" style="display:none">
+                <button mat-raised-button (click)="file.click()" color="primary">
+                    <mat-icon>add_a_photo</mat-icon>
+                </button>
+            </div>
+
+            <div fxFlex="10%" fxLayoutAlign="center" *ngIf="imageBase64">
+                <button mat-raised-button color="accent" (click)="limpiarArchivo()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="image-cointaner" fxLayoutAlign="center" *ngIf="imageBase64">
+            <img [src]="transform()" />
+        </div>
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="nombre" matInput autocomplete="off" maxlength="150">
+                <mat-error *ngIf="f.nombre?.errors?.required">Nombre es un campo requerido"</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center" style="margin-top:10px">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Descripción</mat-label>
+                <textarea formControlName="descripcion" matInput autocomplete="off" matTextareaAutosize
+                    matAutosizeMinRows="3" matAutosizeMaxRows="10" maxlength="500"></textarea>
+                <mat-error *ngIf="f.descripcion?.errors?.required">Descripción es un campo requerido"</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center" style="margin-top:10px">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Precio</mat-label>
+                <input type="number" formControlName="precio" matInput autocomplete="off" type="text" pattern="\d*"
+                    maxlength="15"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                <mat-error *ngIf="f.precio?.errors?.required">Precio es un campo requerido"</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center" style="margin-top:10px">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Disponibilidad</mat-label>
+                <input type="number" formControlName="disponibilidad" matInput autocomplete="off" type="text" maxlength="10"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 && Math.abs(this.value) <= 2147483647 ? Math.abs(this.value) : null">
+                <mat-error *ngIf="f.disponibilidad?.errors?.required">Disponibilidad es un campo requerido"</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Unidad de Medida (Unidad, caja, bulto, tonelada, etc...)</mat-label>
+                <input formControlName="unidadMedida" matInput autocomplete="off" maxlength="100"
+                    matTooltip="Unidad, caja, bolsa, bulto, libra, tonelada, etc...">
+                <mat-error *ngIf="f.unidadMedida?.errors?.required">Unidad de Medida es un campo requerido"</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center" style="margin-top:10px" *ngIf="false">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Etiquetas</mat-label>
+
+                <input placeholder="Nueva Etiqueta..." formControlName="etiqueta" [matAutocomplete]="autoEtiquetas"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matInput>
+
+                <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let etiqueta of etiquetas" [selectable]="true" [removable]="true"
+                        (removed)="removeEtiqueta(etiqueta)"> {{etiqueta}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+                <mat-autocomplete #autoEtiquetas="matAutocomplete" (optionSelected)="selectedEtiqueta($event)">
+                    <mat-option *ngFor="let etiqueta of filteredEtiquetas | async" [value]="etiqueta">
+                        {{etiqueta}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center" style="margin-top:10px">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Categoria</mat-label>
+                <input matInput formControlName="objCategoria" [matAutocomplete]="autoCategoria">
+                <mat-autocomplete #autoCategoria="matAutocomplete" [displayWith]="getOptionText">
+                    <mat-option *ngFor="let option of filteredCategorias | async" [value]="option">
+                        {{option.categoria}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="f.objCategoria.errors?.required">Categoria es un campo requerido"</mat-error>
+                <mat-error *ngIf="f.objCategoria.errors?.incorrect">Seleccione una opción válida</mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div fxLayoutAlign="center" style="margin-top:20px">
+            <button style="width:90%" mat-raised-button (click)="onSubmit()" color="primary">Guardar</button>
+        </div>
+    </form>
+</div>

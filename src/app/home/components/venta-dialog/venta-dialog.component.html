@@ -1,0 +1,121 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center" style="margin-bottom:20px">
+
+    <div fxLayout="row" fxLayoutAlign="center">
+        <h2>Compra #{{data.idCompra}}</h2>
+    </div>
+
+    <mat-accordion multi>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Compra
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <table class="table-info">
+
+                 
+                <tr>
+                    <td class="column-title">Nombre Cliente:</td>
+                    <td class="column-value">{{data.nombreComprador}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Celular Cliente:</td>
+                    <td class="column-value">{{data.celularComprador}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Correo Cliente:</td>
+                    <td class="column-value">{{data.correoComprador}}</td>
+                </tr>
+
+                <br/>
+
+                <tr>
+                    <td class="column-title">Estado:</td>
+                    <td class="column-value">{{data.estado}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Fecha de compra:</td>
+                    <td class="column-value">{{data.fecha | date:"yyyy-MM-dd HH:mm"}}</td>
+                </tr>
+                <tr *ngIf="data.aclaracion">
+                    <td class="column-title">Aclaración de entrega:</td>
+                    <td class="column-value">{{data.aclaracion}}</td>
+                </tr>
+
+                <br/>
+
+                <tr>
+                    <td class="column-title">Fecha de entrega:</td>
+                    <td class="column-value">{{data.fechaEntrega | date:"yyyy-MM-dd"}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Ubicación de entrega:</td>
+                    <td class="column-value">{{data.direccion}} ({{data.barrio}})</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Ciudad de entrega:</td>
+                    <td class="column-value">{{data.ciudad}}</td>
+                </tr>
+                <tr *ngIf="data.direccionDatosAdicionales">
+                    <td class="column-title">Datos adicionales de entrega:</td>
+                    <td class="column-value">{{data.direccionDatosAdicionales}}</td>
+                </tr>               
+
+            </table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Producto
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <table class="table-info">
+                <tr>
+                    <td class="column-title">Tienda:</td>
+                    <td class="column-value">{{data.nombreTienda}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Producto:</td>
+                    <td class="column-value">{{data.nombreProducto}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Cantidad:</td>
+                    <td class="column-value">{{data.cantidad}} ({{data.unidadProducto}})</td>
+                </tr>
+            </table>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="false" #matExpansionPanel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Total
+                </mat-panel-title>
+                <mat-panel-description fxLayoutAlign="end">
+                    {{data.total | currency}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table class="table-info">
+                <tr>
+                    <td class="column-title">{{data.nombreProducto}} x {{data.cantidad}}:</td>
+                    <td class="column-value">{{data.precioTotal | currency}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Costo del flete:</td>
+                    <td class="column-value">{{data.flete | currency}}</td>
+                </tr>
+                <tr>
+                    <td class="column-title">Total:</td>
+                    <td class="column-value">{{data.total | currency}}</td>
+                </tr>
+            </table>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <div fxLayoutAlign="center" style="margin-top:20px" *ngIf="data.estado === 'COMPRADO'">
+        <button style="width:100%" mat-raised-button (click)="onSubmit()" color="primary">Entregar pedido</button>
+    </div>
+   
+</div>

@@ -1,0 +1,44 @@
+<div>
+
+    <div fxLayout="row">
+        <h2>Editar categoria</h2>
+    </div>
+
+    <br />
+
+    <form [formGroup]="form" autocomplete="off">
+
+        <div fxLayoutAlign="center" style="margin-bottom:20px">
+
+            <div fxFlex="10%" fxLayoutAlign="center">
+                <input #file type='file' (change)="onSelectFile($event)" accept="image/*" style="display:none">
+                <button mat-raised-button (click)="file.click()" color="primary">
+                    <mat-icon>add_a_photo</mat-icon>
+                </button>
+            </div>
+
+            <div fxFlex="10%" fxLayoutAlign="center" *ngIf="imageBase64">
+                <button mat-raised-button color="accent" (click)="limpiarArchivo()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="image-cointaner" fxLayoutAlign="center" *ngIf="imageBase64">
+            <img [src]="transform()" />
+        </div>
+
+        <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Nombre de categoria</mat-label>
+            <input formControlName="categoria" matInput autocomplete="off" type="text">
+        </mat-form-field>
+
+        <br /><br />
+
+        <button mat-raised-button class="width-100" (click)="onSubmit()" color="primary">
+            Guardar categoria
+        </button>
+
+    </form>
+
+</div>

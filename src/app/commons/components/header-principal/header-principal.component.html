@@ -1,0 +1,71 @@
+<mat-toolbar color="primary">
+
+  <button mat-button (click)="goToHome()">
+    <mat-icon>home</mat-icon>
+    <span>Inicio</span>
+  </button>
+
+  <button mat-button (click)="goToTiendas()" *ngIf="isPerfilVendedor()">
+    <mat-icon>store</mat-icon>
+    <span>Tiendas</span>
+  </button>
+
+  <button mat-button *ngIf="isPerfilVendedor() || isPerfilAdministrador()" 
+    [matMenuTriggerFor]="menu_informes">
+    <mat-icon>auto_graph</mat-icon>
+    <span>Informes</span>
+  </button>
+  <mat-menu #menu_informes="matMenu">
+    <button mat-menu-item (click)="goToReporteVentasTodas()" *ngIf="isPerfilVendedor()">
+      <span>Todas las ventas</span>
+    </button>
+    <button mat-menu-item (click)="goToReporteVentasTiendas()" *ngIf="isPerfilVendedor()">
+      <span>Ventas por tienda</span>
+    </button>
+    <button mat-menu-item (click)="goToReporteVentasProductos()" *ngIf="isPerfilVendedor()">
+      <span>Ventas por producto</span>
+    </button>
+    <button mat-menu-item (click)="goToReporteAdmTiendas()" *ngIf="isPerfilAdministrador()">
+      <span>Administración de ventas por tiendas</span>
+    </button>
+  </mat-menu>
+
+  
+
+  <span class="example-spacer"></span>
+
+  <button mat-button [matMenuTriggerFor]="menu_configuracion">
+    <mat-icon>settings</mat-icon>
+    <span></span>
+  </button>
+  <mat-menu #menu_configuracion="matMenu">
+    <button mat-menu-item (click)="goToTarifas()" *ngIf="isPerfilVendedor()">
+      <mat-icon>attach_money</mat-icon>
+      <span>Tarifas</span>
+    </button>
+    <button mat-menu-item (click)="goToEtiquetas()" *ngIf="false">
+      <mat-icon>sell</mat-icon>
+      <span>Etiquetas</span>
+    </button>
+    <button mat-menu-item (click)="goToCategorias()" *ngIf="isPerfilAdministrador()">
+      <mat-icon>category</mat-icon>
+      <span>Categorias</span>
+    </button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menu_ajustes">
+    <mat-icon>account_circle</mat-icon>
+    <span></span>
+  </button>
+  <mat-menu #menu_ajustes="matMenu">
+    <button mat-menu-item (click)="goToAjustes()">
+      <mat-icon>person</mat-icon>
+      <span>Perfil</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Salir</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>

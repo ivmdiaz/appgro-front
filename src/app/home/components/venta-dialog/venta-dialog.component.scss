@@ -1,0 +1,28 @@
+::ng-deep .header .mat-card-header-text {
+  margin: 0 !important;
+}
+
+::ng-deep .mat-dialog-container {
+  background-color: #f7f7f7;
+}
+
+.table-info {
+  width: 100%;
+}
+
+.right-aligned-header > .mat-content {
+  justify-content: space-between;
+}
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+flex: 0 0 auto;
+}
+
+.column-title {
+  color: rgba(0, 0, 0, 0.54);
+  width: 30%;
+}
+
+.column-value {
+  color: rgba(0, 0, 0, 0.54);
+}

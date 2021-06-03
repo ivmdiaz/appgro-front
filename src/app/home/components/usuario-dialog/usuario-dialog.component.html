@@ -1,0 +1,58 @@
+<div fxLayout="column" fxLayoutAlign="center">
+
+    <form [formGroup]="usuarioForm" style="margin-top:10px">
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Nombres</mat-label>
+                <input formControlName="nombres" matInput readonly>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Primer apellido</mat-label>
+                <input formControlName="primerApellido" matInput readonly>
+            </mat-form-field>
+        </div>
+
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Segundo apellido</mat-label>
+                <input formControlName="segundoApellido" matInput readonly>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Correo</mat-label>
+                <input formControlName="correo" matInput readonly>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Celular</mat-label>
+                <input formControlName="celular" matInput readonly>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center">
+            <mat-form-field style="width:90%" appearance="fill">
+                <mat-label>Perfil</mat-label>
+                <input matInput autocomplete="off" formControlName="pefil" [matAutocomplete]="autoPerfil">
+                <mat-autocomplete [displayWith]="getOptionText" #autoPerfil="matAutocomplete">
+                    <mat-option *ngFor="let option of filterPerfiles | async" [value]="option">
+                        {{option.nombre}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center" style="margin-top:20px">
+            <button style="width:90%" mat-raised-button (click)="onSubmit()" color="primary">Guardar</button>
+        </div>
+
+    </form>
+</div>
