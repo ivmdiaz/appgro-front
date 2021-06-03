@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { GeocodeService } from './services/geocode.service';
 import { AgmCoreModule } from '@agm/core';
 import {NgModule} from '@angular/core';
@@ -12,6 +13,7 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { ProductoDialogComponent } from './components/producto-dialog/producto-dialog.component';
 
 
+
 @NgModule({
   declarations: [TiendasComponent, TiendaDialogComponent, ProductosComponent, ProductoDialogComponent],
   imports: [
@@ -20,7 +22,7 @@ import { ProductoDialogComponent } from './components/producto-dialog/producto-d
     CommonsModule,
     MaterialModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyChxa5pkUYzkRJcFrI3ZWJPFR_z1DHNSvI'
+      apiKey: environment.apiAgmkey
     }),
   ],
   providers:[GeocodeService]

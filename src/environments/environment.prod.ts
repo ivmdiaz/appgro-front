@@ -1,16 +1,17 @@
+const HOST = 'https://appgro-back.herokuapp.com';
+
 export const environment = {
   production: true,
+  apiPublicUrl: HOST + '/api/public',
+  apiProveedorUrl: '/api/proveedor',
+  apiAdministradorUrl: '/api/administrador',
+  apiUsuarioUrl: '/api/usuario',
+  apiTiendaUrl: '/api/tienda',
+  apiProductoUrl: '/api/producto',
+  apiParametrizacionUrl: '/api/parametrizacion',
+  apiEtiquetaUrl: '/api/etiqueta',
+  apiCategoriaUrl: '/api/categoria',
+  apiReportesUrl: '/api/reportes',
 
-
-  apiPublicUrl: 'https://appgro-back.herokuapp.com/api/public',
-  apiProveedorUrl: 'https://appgro-back.herokuapp.com/api/proveedor',
-  apiAdministradorUrl: 'https://appgro-back.herokuapp.com/api/administrador',
-  apiUsuarioUrl: 'https://appgro-back.herokuapp.com/api/usuario',
-  apiTiendaUrl: 'https://appgro-back.herokuapp.com/api/tienda',
-  apiProductoUrl: 'https://appgro-back.herokuapp.com/api/producto',
-  apiParametrizacionUrl: 'https://appgro-back.herokuapp.com/api/parametrizacion',
-  apiEtiquetaUrl: 'https://appgro-back.herokuapp.com/api/etiqueta',
-  apiCategoriaUrl: 'https://appgro-back.herokuapp.com/api/categoria',
-  apiReportesUrl: 'https://appgro-back.herokuapp.com/api/reportes',
-  
+  apiAgmkey: 'AIzaSyChxa5pkUYzkRJcFrI3ZWJPFR_z1DHNSvI'
 };
