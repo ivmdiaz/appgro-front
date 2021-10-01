@@ -13,6 +13,6 @@ export const environment = {
   apiCategoriaUrl: HOST + '/api/categoria',
   apiReportesUrl: HOST + '/api/reportes',
 
-  apiAgmkey: 'AIzaSyChxa5pkUYzkRJcFrI3ZWJPFR_z1DHNSvI'
+  apiAgmkey: 'yourKey'
 };
 
