@@ -38,3 +38,21 @@ export function editDistance(s1, s2): number {
     }
     return costs[s2.length];
 }
+
+export function openPdfBase64NewTab(base64String): void {
+
+    let html = '';
+
+    html += '<html>';
+    html += '<head><title>Appgro Web (Vista previa PDF)</title></head>'
+    html += '<body style="margin:0!important">';
+    html += '<object width="100%" height="100%" data="data:application/pdf;base64,'+base64String+'" type="application/pdf">';
+    html += '</object>';
+    html += '</body>';
+    html += '</html>';
+
+    setTimeout(() => {
+      const win = window.open("","_blank");
+      win.document.write(html);
+    }, 100);
+  }

@@ -14,6 +14,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
 import { RequiredMatch } from 'src/app/commons/validators/required-match.validator';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { openPdfBase64NewTab } from 'src/app/commons/helpers/strings-util';
 
 @Component({
   selector: 'app-reporte-adm-tiendas',
@@ -278,11 +279,7 @@ export class ReporteAdmTiendasComponent implements OnInit {
   }
 
   downloadPdf(base64String, fileName) {
-    const source = `data:application/pdf;base64,${base64String}`;
-    const link = document.createElement("a");
-    link.href = source;
-    link.download = `${fileName}.pdf`
-    link.click();
+    openPdfBase64NewTab(base64String);
   }
 
 }

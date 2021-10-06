@@ -6,6 +6,12 @@
         <h2>Lista de tarifas por fletes</h2>
     </div>
 
+    <div fxLayout="row" [style.margin-top]="'10px'">
+        <p>Ayuda: Puede guiarse del costo de flete con la calculadora en línea del ministerio de transporte: (T = GF + GV(D)) 
+            <a href="https://plc.mintransporte.gov.co/Runtime/empresa/ctl/SiceTAC/mid/417" target="_blank"> abrir calculadora</a>
+        </p>
+    </div>
+
     <div fxLayout="row">
 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

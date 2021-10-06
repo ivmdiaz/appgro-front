@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
 import { RequiredMatch } from 'src/app/commons/validators/required-match.validator';
+import { openPdfBase64NewTab } from 'src/app/commons/helpers/strings-util';
 
 @Component({
   selector: 'app-reporte-ventas-tienda',
@@ -256,11 +257,7 @@ export class ReporteVentasTiendaComponent implements OnInit {
   }
 
   downloadPdf(base64String, fileName) {
-    const source = `data:application/pdf;base64,${base64String}`;
-    const link = document.createElement("a");
-    link.href = source;
-    link.download = `${fileName}.pdf`
-    link.click();
+    openPdfBase64NewTab(base64String);
   }
 
 }
